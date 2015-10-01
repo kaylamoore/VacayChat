@@ -11,7 +11,8 @@ var express 		= require('express'),
 	morgan			= require('morgan'),
 	cookieParser	= require('cookie-parser'),
 	session			= require('express-session'),
-	configDB		= require('./config/database.js')
+	configDB		= require('./config/database.js'),
+	http			= require('http').Server(app);
 	
 	
 
@@ -25,7 +26,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
 
-app.set('view engine' 'ejs'); //sets the ejs for templates
+app.set('view engine', 'ejs'); //sets the ejs for templates
 
 // required for passport
 app.use(session({ secret: 'supersecretkey'})); //session secret
@@ -35,6 +36,12 @@ app,use(flash()); //for flash messaging
 
 app.use('/api', apiRouter) //when you get a request starting with api use apiRouter
 
+// define route handler that gets called when we hit web home 
+app.get('/', function (req, res){
+	res.send('<h1>Hello world</h1>');
+});
 
+
+// listen on pot 
 app.listen(port)
 console.log("listening on port" + port)
