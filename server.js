@@ -38,7 +38,7 @@ app.use('/api', apiRouter) //when you get a request starting with api use apiRou
 
 // define route handler that gets called when we hit web home 
 app.get('/', function (req, res){
-	res.send('<h1>Hello world</h1>');
+	res.sendFile(__dirname + '/index.html');
 });
 
 
