@@ -46,6 +46,9 @@ app.get('/', function (req, res){
 //listen on connection event for incoming sockets, console log it 
 io.on('connection', function(socket){
 	console.log('a user connected');
+	socket.on('disconnect', function(){
+		console.log('user disconnected');
+	});
 });
 
 
