@@ -13,6 +13,7 @@ var express 		= require('express'),
 	session			= require('express-session'),
 	configDB		= require('./config/database.js'),
 	http			= require('http').Server(app);
+	io 				= require('socket.io')(http);
 	
 	
 
@@ -39,6 +40,12 @@ app.use('/api', apiRouter) //when you get a request starting with api use apiRou
 // define route handler that gets called when we hit web home 
 app.get('/', function (req, res){
 	res.sendFile(__dirname + '/index.html');
+});
+
+//initializes new instance of socket.io
+//listen on connection event for incoming sockets, console log it 
+io.on('connection', function(socket){
+	console.log('a user connected');
 });
 
 
